@@ -66,7 +66,7 @@ const create_homework = async (form) => {
 
 
                         <div class="d-grid col-10 mx-auto mt-3">
-                            <button class="btn btn-success">Login</button>
+                            <button class="btn btn-success">Create</button>
                         </div>
                     </fieldset>
                 </form>
