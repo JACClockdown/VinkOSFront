@@ -13,31 +13,31 @@ axios.defaults.headers.common['Authorization'] = 'Bearer ' + authStore.token
 onMounted( ()=>{
     gethomeworks()
 })
-const homeworks = ref([])
+const dates = ref([])
 const load = ref(false)
 const gethomeworks =  async () => {
-    axios.get('api/homeworks').then( (response) => {
+    axios.get('api/dates').then( (response) => {
         console.log(response.data.data)
-        homeworks.value = response.data.data
+        dates.value = response.data.data
         load.value = true
     }).catch( (errors) =>{
         console.log(errors)
     })
 }
 const deleteHomework = (id,name) => {
-    confirmation(name, ('api/homework/'+id), '/home')
+    confirmation(name, ('api/date/'+id), '/home')
 }
 </script>
 <template>
     <h4>
-        List of Homeworks 
+        List of Dates 
     </h4>
     <hr>
     <div class="row">
         <div class="col-md-4">
             <div class="d-grid col-10 ">
-                <router-link to="/create/homework">
-                    <button class="btn btn-info text-white">Add New Homework</button>
+                <router-link to="/create/date">
+                    <button class="btn btn-info text-white">Add New Date</button>
                 </router-link>
             </div>
         </div>
@@ -53,44 +53,33 @@ const deleteHomework = (id,name) => {
                         <th>
                             ID
                         </th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Created Homework At</th>
-                        <th scope="col">Status of Homework</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Born Date</th>
                         <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="homework in homeworks" :key="homework.id">
+                    <tr v-for="date in dates" :key="date.id">
                         <td>
-                            {{  homework.id }}
-                        </td>
-                        <td>
-                            {{  homework.title }}
+                            {{  date.id }}
                         </td>
                         <td>
-                            {{  homework.description }}
+                            {{  date.name }}
                         </td>
                         <td>
-                            {{  homework.created_homework_at }}
-                        </td>
-                        <td v-if=" homework.completed == 0">
-                            <span class="badge bg-danger">
-                                Sin Completar
-                            </span>
-                        </td>
-                        <td v-if=" homework.completed == 1">
-                            <span class="badge bg-success">
-                                Completado
-                            </span>
+                            {{  date.phone }}
                         </td>
                         <td>
-                            <router-link :to="{ path:'edit/'+homework.id}" class="btn btn-warning">
+                            {{  date.born_date }}
+                        </td>
+                        <td>
+                            <router-link :to="{ path:'edit/'+date.id}" class="btn btn-warning">
                                 <i class="fa-solid fa-edit"></i>
                                 Edit
                             </router-link>
                             &nbsp;
-                            <button class="btn btn-danger" @click="$event => deleteHomework(homework.id,homework.title)">Delete</button>
+                            <button class="btn btn-danger" @click="$event => deleteHomework(date.id,date.name)">Delete</button>
                         </td>
                     </tr>
                 </tbody>

@@ -15,7 +15,7 @@ const authStore = useAuthStore()
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <RouterLink to="/home" class="nav-link">
-                            Homeworks
+                            Dates
                         </RouterLink>
                     </li>
                 </ul>
